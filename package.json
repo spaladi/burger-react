@@ -44,6 +44,7 @@
     "postcss-normalize": "7.0.1",
     "postcss-preset-env": "6.6.0",
     "postcss-safe-parser": "4.0.1",
+    "prop-types": "15.6",
     "react": "16.8.6",
     "react-app-polyfill": "^1.0.1",
     "react-dev-utils": "^9.0.1",
@@ -68,20 +69,10 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "setupFiles": [
-      "react-app-polyfill/jsdom"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}", "!src/**/*.d.ts"],
+    "setupFiles": ["react-app-polyfill/jsdom"],
     "setupFilesAfterEnv": [],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -120,9 +111,7 @@
     ]
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
     "extends": "react-app"
