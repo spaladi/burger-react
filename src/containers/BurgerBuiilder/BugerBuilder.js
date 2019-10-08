@@ -7,7 +7,6 @@ import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import errorHandler from "../../hoc/errorHandler";
-import { kStringMaxLength } from "buffer";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -16,7 +15,7 @@ const INGREDIENT_PRICES = {
   bacon: 0.3
 };
 
-class BurgerBiulder extends Component {
+class BurgerBuilder extends Component {
   state = {
     ingredients: null,
     totalPrice: 4,
@@ -56,26 +55,20 @@ class BurgerBiulder extends Component {
   };
 
   purchaseContinuehandler = () => {
-    this.setState({ loading: true });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "Srinivas",
-        address: "Test Street",
-        email: "test@test.com"
-      },
-      deliveryMethod: "fastest"
-    };
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+    queryParams.push("price=" + this.state.totalPrice);
 
-    axios
-      .post("/orders", order)
-      .then(response => {
-        this.setState({ loading: false, purchasing: false });
-      })
-      .catch(error => {
-        this.setState({ loading: false, purchasing: false });
-      });
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryParams.join("&")
+    });
   };
 
   addIngredientHandler = type => {
@@ -164,4 +157,4 @@ class BurgerBiulder extends Component {
   }
 }
 
-export default errorHandler(BurgerBiulder, axios);
+export default errorHandler(BurgerBuilder, axios);
